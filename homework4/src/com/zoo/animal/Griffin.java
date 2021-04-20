@@ -1,5 +1,7 @@
 package com.zoo.animal;
 
+import com.zoo.exception.emptyFoodException;
+
 public class Griffin extends Animal implements Flyable, Gallopable{
     public Griffin() {
     }
@@ -14,7 +16,9 @@ public class Griffin extends Animal implements Flyable, Gallopable{
     }
 
     @Override
-    public void eat(String food) {
+    public void eat(String food) throws emptyFoodException {
+        if (food.equals(""))
+            throw new emptyFoodException("Food is empty!");
         System.out.println("Griffin is eating " + food + "...");
     }
 

@@ -1,5 +1,7 @@
 package com.zoo.animal;
 
+import com.zoo.exception.emptyFoodException;
+
 public class Horse extends Animal implements Shoeable, Gallopable{
     protected Boolean isShoe = false;
 
@@ -21,7 +23,9 @@ public class Horse extends Animal implements Shoeable, Gallopable{
     }
 
     @Override
-    public void eat(String food) {
+    public void eat(String food) throws emptyFoodException {
+        if (food.equals(""))
+            throw new emptyFoodException("Food is empty!");
         System.out.println("Horse eating " + food + "...");
     }
 

@@ -1,5 +1,7 @@
 package com.zoo.animal;
 
+import com.zoo.exception.emptyFoodException;
+
 public class Tiger extends Animal implements Attackable, AbleToWashUp{
     private Boolean isClean = false;
 
@@ -16,7 +18,9 @@ public class Tiger extends Animal implements Attackable, AbleToWashUp{
     }
 
     @Override
-    public void eat(String food) {
+    public void eat(String food) throws emptyFoodException {
+        if (food.equals(""))
+            throw new emptyFoodException("Food is empty!");
         System.out.println("Tiger eating " + food + "...");
     }
 

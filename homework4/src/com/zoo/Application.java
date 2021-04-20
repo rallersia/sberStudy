@@ -2,6 +2,8 @@ package com.zoo;
 
 import com.zoo.animal.*;
 
+import com.zoo.exception.*;
+
 import java.util.Scanner;
 
 public class Application {
@@ -14,6 +16,7 @@ public class Application {
         Pegasus pegasus = new Pegasus("Peg");
         Tiger tiger = new Tiger("Leo");
         Lion lion = new Lion("Daddy");
+        tryBlock(tiger);
         System.out.println("Hi! Welcome to our zoo!");
         int answer;
         do {
@@ -21,34 +24,35 @@ public class Application {
             chooseAction();
             answer = in.nextInt();
             switch (answer) {
-                case 1:
-                    antelopeAction(antelope);
-                    break;
-                case 2:
-                    dragonAction(dragon);
-                    break;
-                case 3:
-                    griffinAction(griffin);
-                    break;
-                case 4:
-                    horseAction(horse);
-                    break;
-                case 5:
-                    lionAction(lion);
-                    break;
-                case 6:
-                    pegasusAction(pegasus);
-                    break;
-                case 7:
-                    tigerAction(tiger);
-                    break;
+                case 1 -> antelopeAction(antelope);
+                case 2 -> dragonAction(dragon);
+                case 3 -> griffinAction(griffin);
+                case 4 -> horseAction(horse);
+                case 5 -> lionAction(lion);
+                case 6 -> pegasusAction(pegasus);
+                case 7 -> tigerAction(tiger);
             }
             System.out.println("Continue? 1 - yes, 0 - no");
             answer = in.nextInt();
         } while (answer == 1);
         System.out.println("Goodbye!");
     }
-
+    private static void tryBlock(Animal animal) {
+        System.out.println("\texception block");
+        System.out.println("try eat with empty food:");
+        try {
+            animal.eat("");
+        } catch (emptyFoodException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("try set empty name:");
+        try {
+            animal.setName("");
+        } catch (emptyNameException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+    }
     private static void chooseAction() {
         System.out.println("1. Antelope");
         System.out.println("2. Dragon");
@@ -63,7 +67,11 @@ public class Application {
         System.out.println("eat:");
         animal.eat();
         System.out.println("eat different food:");
-        animal.eat("carrot");
+        try {
+            animal.eat("carrot");
+        } catch (emptyFoodException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("say:");
         animal.say();
         System.out.println("sleep:");
