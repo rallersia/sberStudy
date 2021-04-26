@@ -16,6 +16,8 @@ public class Application {
         Pegasus pegasus = new Pegasus("Peg");
         Tiger tiger = new Tiger("Leo");
         Lion lion = new Lion("Daddy");
+        Aviary aviary = new Aviary();
+        demonstrateAviary(aviary);
         tryBlock(tiger);
         System.out.println("Hi! Welcome to our zoo!");
         int answer;
@@ -37,6 +39,47 @@ public class Application {
         } while (answer == 1);
         System.out.println("Goodbye!");
     }
+    private static void demonstrateAviary(Aviary aviary) {
+        Horse horse = new Horse("Vapel");
+        Antelope antelope = new Antelope("Oppa");
+        Dragon dragon = new Dragon("Ellion");
+        Griffin griffin = new Griffin("Griff");
+        Pegasus pegasus = new Pegasus("Peg");
+        Tiger tiger = new Tiger("Leo");
+        Lion lion = new Lion("Daddy");
+        System.out.println("\taviary block:");
+
+        try {
+            aviary.add(horse);
+            aviary.add(dragon);
+            aviary.add(antelope);
+            aviary.add(griffin);
+            aviary.add(pegasus);
+            aviary.add(tiger);
+            aviary.add(lion);
+
+        } catch (OverfillingAviaryException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("added 7 different animals");
+        System.out.println("try to add equal horse: ");
+        try {
+            aviary.add(horse);
+        } catch (OverfillingAviaryException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("try to add more animals:");
+        try {
+            aviary.add(new Tiger("Hilo"));
+            aviary.add(new Tiger("Anti"));
+            aviary.add(new Tiger("Hilos"));
+            aviary.add(new Tiger("Dilos"));
+        }  catch (OverfillingAviaryException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        if (aviary.remove(horse))
+            System.out.println("removed horse");
+    }
     private static void tryBlock(Animal animal) {
         System.out.println("\texception block");
         System.out.println("try eat with empty food:");
@@ -53,6 +96,7 @@ public class Application {
         }
         System.out.println();
     }
+
     private static void chooseAction() {
         System.out.println("1. Antelope");
         System.out.println("2. Dragon");
