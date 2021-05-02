@@ -1,7 +1,7 @@
 package com.zoo.animal;
 
 import java.util.ArrayList;
-import com.zoo.exception.OverfillingAviaryException;
+import com.zoo.exception.OverfillingException;
 import com.zoo.exception.AddEqualAnimalException;
 
 public class Aviary {
@@ -10,9 +10,9 @@ public class Aviary {
     {
         animals = new ArrayList<>(MAX_SIZE);
     }
-    public void add(Animal animal) throws OverfillingAviaryException, AddEqualAnimalException{
+    public void add(Animal animal) throws OverfillingException, AddEqualAnimalException{
         if (animals.size() == MAX_SIZE)
-            throw new OverfillingAviaryException("Can't add new animal! Max size = " + MAX_SIZE.toString());
+            throw new OverfillingException("Can't add new animal! Max size = " + MAX_SIZE.toString());
         if (animals.contains(animal))
             throw new AddEqualAnimalException("Can't adding equal animals");
         animals.add(animal);

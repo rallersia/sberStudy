@@ -18,6 +18,7 @@ public class Application {
         Lion lion = new Lion("Daddy");
         Aviary aviary = new Aviary();
         demonstrateAviary(aviary);
+        makeSomeAviary();
         tryBlock(tiger);
         System.out.println("Hi! Welcome to our zoo!");
         int answer;
@@ -39,6 +40,44 @@ public class Application {
         } while (answer == 1);
         System.out.println("Goodbye!");
     }
+    private static void makeSomeAviary() {
+        System.out.println("making aviarys object");
+        Aviarys aviarys = new Aviarys();
+        Aviary lions = new Aviary();
+        try {
+            lions.add(new Lion("Tod"));
+            lions.add(new Lion("Kody"));
+            lions.add(new Lion("Vally"));
+        } catch (OverfillingException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        Aviary cats = new Aviary();
+        try {
+            cats.add(new Lion("Tod"));
+            cats.add(new Tiger("Kody"));
+            cats.add(new Lion("Vally"));
+        } catch (OverfillingException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        Aviary fantasy = new Aviary();
+        try {
+            cats.add(new Pegasus("Tod"));
+            cats.add(new Griffin("Kody"));
+            cats.add(new Dragon("Vally"));
+        } catch (OverfillingException | AddEqualAnimalException e) {
+            System.out.println(e.getMessage());
+        }
+        aviarys.put("lions", lions);
+        aviarys.put("cats", cats);
+        aviarys.put("fantasy", fantasy);
+        System.out.println("Adding animal in not existing aviary");
+        try {
+            aviarys.addAnimal("cats", new Tiger("Tiggy"));
+            aviarys.addAnimal("kittens", new Tiger("Tiggy"));
+        } catch (AddInNotExistingAviaryException | AddEqualAnimalException | OverfillingException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     private static void demonstrateAviary(Aviary aviary) {
         Horse horse = new Horse("Vapel");
         Antelope antelope = new Antelope("Oppa");
@@ -58,14 +97,14 @@ public class Application {
             aviary.add(tiger);
             aviary.add(lion);
 
-        } catch (OverfillingAviaryException | AddEqualAnimalException e) {
+        } catch (OverfillingException | AddEqualAnimalException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("added 7 different animals");
         System.out.println("try to add equal horse: ");
         try {
             aviary.add(horse);
-        } catch (OverfillingAviaryException | AddEqualAnimalException e) {
+        } catch (OverfillingException | AddEqualAnimalException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("try to add more animals:");
@@ -74,7 +113,7 @@ public class Application {
             aviary.add(new Tiger("Anti"));
             aviary.add(new Tiger("Hilos"));
             aviary.add(new Tiger("Dilos"));
-        }  catch (OverfillingAviaryException | AddEqualAnimalException e) {
+        }  catch (OverfillingException | AddEqualAnimalException e) {
             System.out.println(e.getMessage());
         }
         if (aviary.remove(horse))
